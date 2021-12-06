@@ -12,6 +12,17 @@
                               :limit    2500.00
                               :closing-date 2}})
 
+(def purchases-test [{:card-number   "4089929734127588"
+                          :date          (t/date-time 2021 2 13)
+                          :amount        45.00
+                          :establishment "Pague Menos"
+                          :category      "saude"},
+                         {:card-number   "4089929734127588"
+                          :date          (t/date-time 2021 10 8)
+                          :amount        55.00
+                          :establishment "pizzaria"
+                          :category      "restaurantes"}])
+
 (deftest my-equal?-test
   (testing "Que existe os números do cartões de crédito batem"
     (is (my-equal? customer-test "4116289645868243")))
@@ -21,3 +32,13 @@
     (is (not (my-equal? {:name  "Yure Galdino"
                          :CPF   "900.009.909-09"
                          :email "yuregaldino@gmail.com"} "4116289645868243")))))
+
+(deftest total-purchases-test
+  (testing "Que o total das compras bata com o valor esperado"
+    (is (== (total-purchases purchases-test) 100.0)))
+  (testing "Que ... quando possue compras para somar"
+    (is (== (total-purchases []) 0))))
+
+;Teste da função que adiciona uma compra na lista de compras realizadas;
+;Teste da função que lista as compras realizadas;
+;Teste da função que realiza o cálculo dos gastos agrupados por categoria.
