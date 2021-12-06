@@ -14,15 +14,20 @@
 (def purchases (c.db/all-purchases))
 
 ; Valor dos gastos agrupados por categoria;
-(->> purchases
-     (group-by :category)
-     (map c.logic/all-purchases-by-category)
-     (println "COMPRAS POR CATEGORIAL\n"))
+(defn purchases-by-category
+  [purchases]
+  (->> purchases
+       (group-by :category)
+       (map c.logic/all-purchases-by-category)))
+(println "COMPRAS POR CATEGORIAL\n" (purchases-by-category purchases))
 
 (println "\n")
 
 ; Calcular a fatura aberta de cada cliente
-(->> purchases
-     (group-by :card-number)
-     (map #(c.logic/invoice-card % customers))
-     (println "FATURA POR CLIENTE\n"))
+(defn invoices
+  [purchases]
+  (->> purchases
+       (group-by :card-number)
+       (map #(c.logic/invoice-card % customers))))
+
+(println "FATURA POR CLIENTE\n" (invoices purchases))

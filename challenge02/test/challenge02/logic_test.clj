@@ -36,9 +36,5 @@
 (deftest total-purchases-test
   (testing "Que o total das compras bata com o valor esperado"
     (is (== (total-purchases purchases-test) 100.0)))
-  (testing "Que ... quando possue compras para somar"
+  (testing "Que retorna 0 quando não há compras para somar"
     (is (== (total-purchases []) 0))))
-
-;Teste da função que adiciona uma compra na lista de compras realizadas;
-;Teste da função que lista as compras realizadas;
-;Teste da função que realiza o cálculo dos gastos agrupados por categoria.
