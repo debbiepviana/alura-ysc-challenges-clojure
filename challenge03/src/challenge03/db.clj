@@ -88,3 +88,19 @@
 
 (defn one-customer [db customer-id]
   (d/pull db '[*] [:customer/id customer-id]))
+
+;(d/pull db '[*] [:customer/id customer-id])
+
+(defn customer-without-purchase [db]
+  (d/q '[:find (pull ?customer [*])
+         :where [?customer :customer/name]
+         (not [?customer :customer/purchase _])] db))
+;
+;(defn todos-os-produtos-por-preco [db preco-minimo-requisitado]
+;  (d/q '[:find ?nome, ?preco
+;         :in $, ?preco-minimo
+;         :keys produto/nome, produto/preco
+;         :where [?produto :produto/preco ?preco]
+;         [(> ?preco ?preco-minimo)]
+;         [?produto :produto/nome ?nome]]
+;       db, preco-minimo-requisitado))

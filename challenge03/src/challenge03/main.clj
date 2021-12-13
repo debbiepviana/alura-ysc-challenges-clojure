@@ -118,4 +118,8 @@
                           :customer/purchase
                           [:purchase/id (:purchase/id p04)]]]))
 (pprint (db/one-customer (d/db conn) (:customer/id customer02)))
-(pprint (db/delete-db))
+
+(pprint (db/all-customers (d/db conn)))
+
+(pprint (db/customer-without-purchase (d/db conn)))
+;(pprint (db/delete-db))
